@@ -1,7 +1,7 @@
 # Features and dependencies are derived from the pinned upstream Cargo.toml.
 [package]
 name = "msquic-src"
-version = "2.5.7"
+version = "2.5.8"
 edition = "2021"
 license = "MIT AND Apache-2.0"
 description = "The unmodified MsQuic Rust crate and native sources, pinned to an upstream release."
