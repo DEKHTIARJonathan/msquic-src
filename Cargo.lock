@@ -258,7 +258,7 @@ checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
 
 [[package]]
 name = "msquic-src"
-version = "2.5.11"
+version = "2.5.12"
 dependencies = [
  "bindgen",
  "bitflags",
