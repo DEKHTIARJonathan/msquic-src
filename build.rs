@@ -46,7 +46,7 @@ fn copy_sources(source: &Path, destination: &Path) {
             continue;
         }
         let output = destination.join(&name);
-        if entry.file_type().expect("source file type").is_dir() {
+        if entry.path().is_dir() {
             copy_sources(&entry.path(), &output);
         } else if !output.exists() {
             fs::copy(entry.path(), output).expect("copy upstream source");

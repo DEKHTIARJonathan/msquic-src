@@ -115,10 +115,7 @@ jobs:
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: candidate
-          path: |
-            dist/*.crate
-            target/package-src/
-            !target/package-src/target/**
+          path: dist/*.crate
           if-no-files-found: error
 
   smoke-tests:
@@ -196,6 +193,7 @@ jobs:
       - uses: actions/download-artifact@v8.0.2
         with:
           name: candidate
+          path: dist
       - name: Prepare packaged MsQuic smoke tests
         env:
           FEATURES: ${{ matrix.features }}
@@ -331,8 +329,12 @@ jobs:
       - uses: actions/download-artifact@v8.0.2
         with:
           name: candidate
+          path: dist
       - name: Verify the publication archive matches the tested crate
         run: |
+          mkdir -p target/package-src
+          tar -xf dist/*.crate -C target/package-src --strip-components=1
+          mv target/package-src/Cargo.toml.orig target/package-src/Cargo.toml
           cargo package --manifest-path target/package-src/Cargo.toml \
             --locked --no-verify
           cmp dist/*.crate target/package-src/target/package/*.crate
@@ -355,6 +357,7 @@ jobs:
       - uses: actions/download-artifact@v8.0.2
         with:
           name: candidate
+          path: dist
       - name: Verify crates.io serves the tested archive
         run: |
           version=$(python3 -c 'import tomllib;
