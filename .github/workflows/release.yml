@@ -363,6 +363,7 @@ jobs:
           version=$(python3 -c 'import tomllib;
           print(tomllib.load(open("Cargo.toml", "rb"))["package"]["version"])')
           registry="https://static.crates.io/crates/msquic-src"
+          mkdir -p target
           curl --fail --location --retry 12 --retry-all-errors \
             --retry-delay 10 \
             "$registry/msquic-src-$version.crate" \
